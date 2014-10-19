@@ -1,29 +1,30 @@
-width = 150;
+hdd_width = 120;
+mount_width = 150;
 height = 60;
-horizontal_padding = 25;
+horizontal_padding = 20;
 vertical_padding = 5;
 
-hdd_hole_spacing = 120;
+hdd_hole_spacing = 101;
 mount_hole_spacing = 140;
 
 module frame() { 
 	difference() {
-		cube([width, height, 1], center=true);
-		cube([width - (2 * horizontal_padding), height - (2 * vertical_padding), 2], center=true);
+		cube([hdd_width, height, 1], center=true);
+		cube([hdd_width - (2 * horizontal_padding), height - (2 * vertical_padding), 2], center=true);
 	}
 	
 	translate([0, 0, 2])
-		cube([width, 1, 5], center=true);
+		cube([hdd_width, 1, 5], center=true);
 	
 	
 	translate([0, height / 2, 9.5])
-		cube([width, 1, 20], center=true);
+		cube([mount_width, 1, 20], center=true);
 }
 
 module hdd_holes(z) {
-	translate([-(hdd_hole_spacing / 2), z, 0])
+	translate([-(hdd_hole_spacing / 2), z + 6, 0])
 		cylinder(r=2, h=2, center=true, $fn=10);
-	translate([hdd_hole_spacing / 2, z, 0])
+	translate([hdd_hole_spacing / 2, z + 6, 0])
 		cylinder(r=2, h=2, center=true, $fn=10);
 }
 
@@ -42,5 +43,5 @@ difference() {
 	hdd_holes(-(height / 4));
 	hdd_holes(height / 4);
 
-	mount_holes(10);	
+	mount_holes(13);	
 }
